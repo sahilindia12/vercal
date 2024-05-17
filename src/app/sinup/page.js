@@ -6,6 +6,11 @@ import { toast } from 'react-toastify'
 
 function page() {
 
+  for (let k = 0; k < 111; k++) {
+    console.log(k);
+    
+  }
+
  const [username, setusername] = useState();
  const [password, setpassword] = useState();
  const [token, settoken] = useState('token coming');
