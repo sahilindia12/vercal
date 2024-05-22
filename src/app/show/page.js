@@ -6,6 +6,8 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 function  page () {
+
+ 
     const router= useRouter()
     const mosue=()=>{
 router.refresh()

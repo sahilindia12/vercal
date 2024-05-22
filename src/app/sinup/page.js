@@ -11,6 +11,8 @@ function page() {
  const [password, setpassword] = useState();
  const [token, settoken] = useState('token coming');
  const [email, setemail] = useState();
+
+ 
  console.log(email,password,username);
 
 console.log(token);

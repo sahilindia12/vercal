@@ -7,7 +7,7 @@ export function middleware(request) {
   
 
     const cookieStore = cookies()
-    const token = cookieStore.get('name')
+    const token = cookieStore.get('cook1')
     console.log('token',token);
 if (!token) {
     return NextResponse.redirect(new URL('/sinup', request.url))
