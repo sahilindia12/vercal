@@ -6,10 +6,6 @@ import { toast } from 'react-toastify'
 
 function page() {
 
-  for (let k = 0; k < 111; k++) {
-    console.log(k);
-    
-  }
 
  const [username, setusername] = useState();
  const [password, setpassword] = useState();
@@ -24,7 +20,7 @@ console.log(token);
     toast.warning("not send datda")
   }
   else{
-    const call= await   axios.post("http://localhost:3000/backend/api",{username,password,email})
+    const call= await   axios.post("http://localhost:3000/backend/api",{username,password,email ,'methos':"post"})
   console.log(call.data);
   settoken(call.data.token)
   toast.success("singup")

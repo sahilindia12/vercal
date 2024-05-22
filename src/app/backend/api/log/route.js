@@ -1,36 +1,37 @@
 import { NextResponse } from "next/server"
 import { sahill } from "../../model/sin";
 import bcrypt from 'bcrypt';
+import { save } from "../../model/sinh";
 export const POST =async(req)=>{
 
     const {email,password}= await req.json()
     console.log(password,email);
 
-    const user= await sahill.findOne({'email':email})
+    const user= await save.findOne({'email':email})
 
-return NextResponse.json({"data":user})
+// return NextResponse.json({"data":user})
 
-    // try {
-    //     const user= await sahill.findOne({'email':email})
-    //     if (!user) {
-    //         return NextResponse.json({"user":"nto fonut"})
-            
-    //     }
-    //     else{
+ try {
 
-    //         // const pas= await bcrypt.compare(password,user.password)
-    //         // if (!pas) {
-    //         //      return NextResponse.status(404).json({'user':"password dont not match"})
-    //         // }
-    //         // else{
-    //         //     return NextResponse.json(user)
-    //         // }
-    //         return NextResponse.json(user)
-    //     }
-        
-    //   } catch (error) {
-    //     return NextResponse.json({'error':error})
-    //   }
+    if (!user) {
+        return  NextResponse.json({'data':'not found user'})
 
+    }
+    else{
+        const haipas=  await bcrypt.compare(password,user.password)
+
+        if (!haipas) {
+            return  NextResponse.json({'data':'not password user'})
+
+        }
+        else{
+            return  NextResponse.json({'data':user})
+
+        }
+    }
+    
+ } catch (error) {
+    
+ }
 
 }
