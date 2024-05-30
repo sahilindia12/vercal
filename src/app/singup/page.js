@@ -6,7 +6,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { redirect } from 'next/dist/server/api-utils';
 
 export default function page() {
 
@@ -18,7 +17,9 @@ const [pas, setpas] = useState(true);
           password:''
         },
         validationSchema: Yup.object({
-           
+            username: Yup.string()
+              .max(15, 'Must be 15 characters or less')
+              .required('ples inter username'),
             email: Yup.string()
               .email('Invalid email address')
               .required('Required email '),
@@ -28,8 +29,8 @@ const [pas, setpas] = useState(true);
         onSubmit:  async(values) => {
     
             const api = await axios.post("http://localhost:3000/api/singup",{values})
-        console.log(api)
-        console.log(api)
+        console.log(api.data)
+        
         console.log(values)
         toast.success("submit your from")
         },
@@ -43,8 +44,21 @@ const [pas, setpas] = useState(true);
 
 
 
-<form className=' mx-[23vw] bg-slate-100 p-4 rounded-md' onSubmit={formik.handleSubmit}>
-
+<form className=' mx-[33vw] bg-slate-100 p-4 rounded-md' onSubmit={formik.handleSubmit}>
+<div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">user name</label>
+    <input 
+        id="text"
+        name="username"
+        type="text"
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.username}
+   class="form-control"  aria-describedby="emailHelp"/>
+  </div>
+  {formik.touched.username && formik.errors.username ? (
+          <div className=' text-red-500'>{formik.errors.username}</div>
+        ) : null}
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
     <input
@@ -83,10 +97,10 @@ const [pas, setpas] = useState(true);
   {formik.touched.password && formik.errors.password ? (
           <div className=' text-red-500'>{formik.errors.password}</div>
         ) : null}
-<div className=' flex justify-center bg-green-500 rounded-md shadow-lg mx-[8vw] text-2xl text-white'>  <button type="submit">Submit</button></div>
+  <button type="submit">Submit</button>
 </form>
 
-       <button onClick={()=>redirect('/kk')}>redrect</button>
+       
        
     </div>
   )

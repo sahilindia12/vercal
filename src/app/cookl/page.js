@@ -4,6 +4,8 @@ export default function page() {
 
     const cookieStore = cookies()
     const token = cookieStore.get('cook1')
+
+    
     console.log('token',token);
   return (
     <div>page
